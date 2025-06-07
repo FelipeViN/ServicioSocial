@@ -1,10 +1,16 @@
 
 #top {
     position: relative;
-    background-color: #036fab;
+    background-color: #146a21;
     color: white;
     padding: 5px;
     margin: 0px 0px 10px 0px;
+    height: 48px;
+    font-size: 20px;    
+}
+#texto{
+ font-size: 33px;
+ font: arial;
 }
 
 #bottom {

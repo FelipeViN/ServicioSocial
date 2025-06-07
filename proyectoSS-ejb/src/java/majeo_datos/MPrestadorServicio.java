@@ -5,9 +5,11 @@
 package majeo_datos;
 
 import acceso_datos.PrestadorServicioFacade;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import modelo.PrestadorServicio;
 
 /**
  *
@@ -19,6 +21,21 @@ public class MPrestadorServicio {
 
     @EJB
     private PrestadorServicioFacade prestadorServicioFacade;
+    
+    public List<PrestadorServicio> pertadororesServicio(){
+    return prestadorServicioFacade.findAll();
+    }
+    public void registrar(PrestadorServicio ps){
+    prestadorServicioFacade.create(ps);
+    }
+    public int obtenerSiguienteId(){
+    List<PrestadorServicio> lista = prestadorServicioFacade.findAll();
+            int maxId = lista.stream()
+                .mapToInt(PrestadorServicio::getIdPrestador)
+                .max()
+                .orElse(0);
+        return maxId + 1;
+    }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
