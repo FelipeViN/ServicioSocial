@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -28,7 +30,121 @@
             </ui:define>
 
             <ui:define name="content">
-                content
+                <f:view>
+
+
+                    <h:form>
+                        <p:messages closable="true" />
+                        <h1><h:outputText value="Formulario de registro"/></h1>
+                        <h:panelGrid columns="2">
+                            <h:outputLabel value="Fecha de nacimiento:" for="fechaNac" />
+                            <p:calendar id="fechaNac"
+                                        value="#{acceso.psn.fechaNac}"
+                                        pattern="dd/MM/yyyy"
+
+                                        navigator="true"
+                                        required="true"
+                                        yearRange="1925:2015"
+                                        requiredMessage="  La fecha de nacimiento es requerida."/>
+
+
+
+
+
+                            <h:outputLabel value="NumeroControl:" for="numeroControl" />
+                            <h:inputText id="numeroControl" 
+                                         value="#{acceso.psn.numeroControl}" 
+                                         title="NumeroControl"
+                                         styleClass="form-control"
+                                         required="true"
+                                         requiredMessage="  El numero de contro es requerido."/>
+
+                            <h:outputLabel value="ApellidoMaterno:" for="apellidoMaterno" />
+                            <h:inputText id="apellidoMaterno"
+                                         value="#{acceso.psn.apellidoMaterno}"
+                                         title="ApellidoMaterno"
+                                         styleClass="form-control"
+                                         required="true"
+                                         requiredMessage="  El apellido materno es requerido."/>
+
+                            <h:outputLabel value="ApellidoPaterno:" for="apellidoPaterno" />
+                            <h:inputText id="apellidoPaterno"
+                                         value="#{acceso.psn.apellidoPaterno}"
+                                         title="ApellidoPaterno"
+                                         styleClass="form-control"
+                                         required="true"
+                                         requiredMessage="  El apellido paterno es requerido"/>
+
+                            <h:outputLabel value="Nombre:" for="nombre" />
+                            <h:inputText id="nombre"
+                                         value="#{acceso.psn.nombre}"
+                                         title="Nombre"
+                                         styleClass="form-control"
+                                         required="true"
+                                         requiredMessage="  El nombre es requerido."/>
+
+                            <h:outputLabel value="Carrera:" for="carrera" />
+                            <h:inputText id="carrera"
+                                         value="#{acceso.psn.carrera}"
+                                         title="Carrera"
+                                         styleClass="form-control"
+                                         required="true"
+                                         requiredMessage="  La carrera es requerida."/>
+
+                            <h:outputLabel value="Direccion:" for="direccion" />
+                            <h:inputText id="direccion"
+                                         value="#{acceso.psn.direccion}"
+                                         title="Direccion"
+                                         styleClass="form-control"
+                                         required="true"
+                                         requiredMessage="  La direccion es requerida."/>
+
+                            <h:outputLabel value="Email:" for="email" />
+                            <h:inputText id="email"
+                                         value="#{acceso.psn.email}" 
+                                         title="Email"
+                                         styleClass="form-control"
+                                         required="true"
+                                         requiredMessage="  El email es requerido."/>
+
+                            <h:outputLabel value="Contraseña:" for="password" />
+                            <h:inputText id="password"
+                                         value="#{acceso.psn.password}"
+                                         title="Password"
+                                         styleClass="form-control"
+                                         required="true"
+                                         requiredMessage="  La contraseña es requerida."/>
+
+                            <h:outputLabel value="Confirmar contraseña:" for="validatePassword" />
+                            <h:inputText id="validatePassword"
+                                         value="#{acceso.validatePassword}"
+                                         title="Password"
+                                         styleClass="form-control"
+                                         required="true"
+                                         requiredMessage="  La confirmación de la contraseña es requerida."/>
+
+                            <h:outputLabel value="Telefono:" for="telefono" />
+                            <h:inputText id="telefono"
+                                         value="#{acceso.psn.telefono}"
+                                         title="Telefono"
+                                         styleClass="form-control"
+                                         required="true"
+                                         requiredMessage="  El numero celular es requerido."/>
+
+
+                            <h:commandButton value="Registro"
+                                             action="#{acceso.registrarPrestador()}"
+                                             styleClass="btn btn-success"
+                                             style="background-color: #146a21"/>
+                            
+
+
+
+                        </h:panelGrid>
+                    </h:form>
+
+                </f:view>
+
             </ui:define>
 
         </ui:composition>
