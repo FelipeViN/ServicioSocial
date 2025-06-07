@@ -22,12 +22,14 @@ public class MPrestadorServicio {
     @EJB
     private PrestadorServicioFacade prestadorServicioFacade;
     
-    public List<PrestadorServicio> pertadororesServicio(){
+    public List<PrestadorServicio> prestadororesServicio(){
     return prestadorServicioFacade.findAll();
     }
+    
     public void registrar(PrestadorServicio ps){
     prestadorServicioFacade.create(ps);
     }
+    
     public int obtenerSiguienteId(){
     List<PrestadorServicio> lista = prestadorServicioFacade.findAll();
             int maxId = lista.stream()

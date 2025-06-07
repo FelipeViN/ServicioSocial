@@ -29,9 +29,12 @@ public class Acceso implements Serializable {
     private PrestadorServicio sesion;
     private PrestadorServicio psn;
     private String validatePassword;
+    private PrestadorServicio loginData;
 
     public Acceso() {
         psn = new PrestadorServicio();
+        sesion = new PrestadorServicio();
+        loginData = new PrestadorServicio();
     }
     //Metodos genericos
 
@@ -67,6 +70,15 @@ public class Acceso implements Serializable {
         this.validatePassword = validatePassword;
     }
 
+    public PrestadorServicio getLoginData() {
+        return loginData;
+    }
+
+    public void setLoginData(PrestadorServicio loginData) {
+        this.loginData = loginData;
+    }
+    
+
     // Registros
     public String registrarPrestador() {
         if (!psn.getPassword().equals(validatePassword)) {
@@ -82,15 +94,34 @@ public class Acceso implements Serializable {
         }
         psn.setIdPrestador(mPrestadorServicio.obtenerSiguienteId());
         mPrestadorServicio.registrar(psn);
-        sesion = psn;
         psn = new PrestadorServicio();
-        validatePassword= "";
+        validatePassword = "";
         return "login?faces-redirect=true";
+    }
+
+    public String iniciarSesion() {
+        List<PrestadorServicio> lista = mPrestadorServicio.prestadororesServicio();
+        
+        for (PrestadorServicio ps : lista) {
+            if (ps.getEmail().equals(loginData.getEmail())
+                    && ps.getPassword().equals(loginData.getPassword())) {
+                sesion = loginData;
+                return redirectUsuario();
+            }
+        }
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "El email o la contraseña son incorrectas", null));
+        return null;
     }
 
     // Redirecciones
     public String redirectHome() {
         return "index?faces-redirect=true";
+    }
+
+    public String redirectUsuario() {
+        return "usuario?faces-redirect=true";
     }
 
     public String redirectLogIn() {
