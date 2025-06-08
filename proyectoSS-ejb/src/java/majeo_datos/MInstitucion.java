@@ -4,8 +4,12 @@
  */
 package majeo_datos;
 
+import acceso_datos.InstitucionFacade;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import modelo.Institucion;
 
 /**
  *
@@ -15,6 +19,15 @@ import javax.ejb.LocalBean;
 @LocalBean
 public class MInstitucion {
 
+    @EJB
+    private InstitucionFacade institucionFacade;
+    
+    public List<Institucion> institutciones(){
+    return institucionFacade.findAll();
+    }
+    public void registrar(Institucion institucion){
+    institucionFacade.create(institucion);
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

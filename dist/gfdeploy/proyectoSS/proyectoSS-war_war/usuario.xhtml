@@ -1,18 +1,72 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
 
         <ui:composition template="./templates/contenidoGeneral.xhtml">
 
             <ui:define name="top">
-                top
+
+                <nav class="navbar bg-body-tertiary">
+                    <div class="container" width="100%">
+                        <a class="navbar-brand" href="#">
+                            <img src="#{request.contextPath}/resources/images/sigss_logo.png" alt="sigss_logo.png" width="200" />
+                        </a>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <h:form>
+                                <h:commandButton value="Inicio"
+                                                 action="#{acceso.redirectHome}"
+                                                 styleClass="btn btn-success"
+                                                 style="background-color: #ffffff; color: black"/>
+                                <h:commandButton value="Informacion Personal"
+                                                 action="#{acceso.redirectInformacion}"
+                                                 styleClass="btn btn-success"
+                                                 style="background-color: #ffffff; color: black"/>
+                                <h:commandButton value="Servicio social"
+                                                 action="#{acceso.redirectSerivicioSocial()}"
+                                                 styleClass="btn btn-success"
+                                                 style="background-color: #ffffff; color: black"/>
+                                <h:commandButton value="Cerrar Sesion"
+                                                 action="#{acceso.redirectSignOut}"
+                                                 styleClass="btn btn-success"
+                                                 style="background-color: #ffffff; color: black"/>
+                            </h:form>
+                        </div>
+                    </div>
+
+                </nav>
+
+            </ui:define>
+
+            <ui:define name="left">
+
             </ui:define>
 
             <ui:define name="content">
-                content
+                <div class="card mb-3" style="max-width: 540px; margin-top: 40px">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="#{request.contextPath}/resources/images/e03444be-2c30-46cc-bbaa-c9df41494f1b.jpg" class="img-fluid rounded-start" alt="fotoDePerfil.jpg"/>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Datos del alumno</h5>
+                                <p class="card-text">Apellido Paterno: #{acceso.sesion.apellidoPaterno}</p>
+                                <p class="card-text">Apellido Materno: #{acceso.sesion.apellidoMaterno}</p>
+                                <p class="card-text">Nombre(s): #{acceso.sesion.nombre}</p>
+                                <p class="card-text">Correo electrónico: #{acceso.sesion.email}</p>
+                                <p class="card-text">No. Control: #{acceso.sesion.numeroControl}</p>
+                                <p class="card-text">Carrera: #{acceso.sesion.carrera}</p>
+                                <p class="card-text">Semestre: Onceavo</p>
+                                <p class="card-text"><small class="text-body-secondary"></small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </ui:define>
 
         </ui:composition>

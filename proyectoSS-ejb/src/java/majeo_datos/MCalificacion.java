@@ -4,8 +4,12 @@
  */
 package majeo_datos;
 
+import acceso_datos.CalificacionFacade;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import modelo.Calificacion;
 
 /**
  *
@@ -15,6 +19,16 @@ import javax.ejb.LocalBean;
 @LocalBean
 public class MCalificacion {
 
+    @EJB
+    private CalificacionFacade calificacionFacade;
+    
+    public List<Calificacion> calificaciones(){
+    return calificacionFacade.findAll();
+    }
+    public void registrar(Calificacion calificacion){
+    calificacionFacade.create(calificacion);
+    }
+    
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

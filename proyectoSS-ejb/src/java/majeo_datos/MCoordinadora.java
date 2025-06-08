@@ -4,8 +4,12 @@
  */
 package majeo_datos;
 
+import acceso_datos.CoordinadoraFacade;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import modelo.Coordinadora;
 
 /**
  *
@@ -15,6 +19,15 @@ import javax.ejb.LocalBean;
 @LocalBean
 public class MCoordinadora {
 
+    @EJB
+    private CoordinadoraFacade coordinadoraFacade;
+
+    public List<Coordinadora>coordinadoras(){
+    return coordinadoraFacade.findAll();
+    }
+    public void registrar(Coordinadora coordinadora){
+    coordinadoraFacade.create(coordinadora);
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

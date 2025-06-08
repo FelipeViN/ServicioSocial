@@ -4,8 +4,12 @@
  */
 package majeo_datos;
 
+import acceso_datos.VacanteFacade;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import modelo.Vacante;
 
 /**
  *
@@ -15,6 +19,15 @@ import javax.ejb.LocalBean;
 @LocalBean
 public class MVacante {
 
+    @EJB
+    private VacanteFacade vacanteFacade;
+    
+    public List<Vacante>vacantes(){
+    return vacanteFacade.findAll();
+    }
+    public void registrar(Vacante vacante){
+    vacanteFacade.create(vacante);
+    }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

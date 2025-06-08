@@ -5,9 +5,11 @@
 package majeo_datos;
 
 import acceso_datos.DocumentoFacade;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ejb.LocalBean;
+import modelo.Documento;
 
 /**
  *
@@ -19,6 +21,13 @@ public class MDocumento {
 
     @EJB
     private DocumentoFacade documentoFacade;
+    
+    public List<Documento>documentos(){
+    return documentoFacade.findAll();
+    }
+    public void registrar(Documento documento){
+    documentoFacade.create(documento);
+    }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

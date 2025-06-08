@@ -105,7 +105,7 @@ public class Acceso implements Serializable {
         for (PrestadorServicio ps : lista) {
             if (ps.getEmail().equals(loginData.getEmail())
                     && ps.getPassword().equals(loginData.getPassword())) {
-                sesion = loginData;
+                sesion = ps;
                 return redirectUsuario();
             }
         }
@@ -130,6 +130,15 @@ public class Acceso implements Serializable {
 
     public String redirectSignUp() {
         return "sign up?faces-redirect=true";
+    }
+    public String redirectInformacion() {
+        return "informacion?faces-redirect=true";
+    }
+    public String redirectSerivicioSocial() {
+        return "servicioSocial?faces-redirect=true";
+    }
+    public String redirectSignOut() {
+        return "index?faces-redirect=true";
     }
 
 }
