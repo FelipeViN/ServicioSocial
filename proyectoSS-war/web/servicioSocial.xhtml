@@ -63,6 +63,7 @@
                         <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" style="color: #ffffff">Fase 6</button>
                     </li>
                 </ul>
+                <h:messages globalOnly="true" style="color:red" />
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                         <div class="card mb-3" style="max-width: 540px; margin-top: 40px">
@@ -90,36 +91,197 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                        
                         <div class="card-group">
                             <div class="card">
-                                <img src="..." class="card-img-top" alt="..."/>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                                    </div>
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Reporte Bimestral 1" />
+                                        <h:inputFile value="#{documentoBean.reporteBimestralUno}" id="reporteBimestralUno"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('reporteBimestralUno')}"/>
+                                    </h:form>
+                                </div>
                             </div>
                             <div class="card">
-                                <img src="..." class="card-img-top" alt="..."/>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                                    </div>
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Evaluacion de las actividades 1" />
+                                        <h:inputFile value="#{documentoBean.evaluacionUno}" id="evaluacionUno"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('evaluacionUno')}"/>
+                                    </h:form>
+                                </div>
                             </div>
+                        </div>
+                        <div class="card-group">
                             <div class="card">
-                                <img src="..." class="card-img-top" alt="..."/>
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                                    </div>
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Autoevaluacion 1" />
+                                        <h:inputFile value="#{documentoBean.autoevaluacionUno}" id="autoevaluacionUno"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('autoevaluacionUno')}"/>
+                                    </h:form>
+                                </div>
+                            </div>
+                            <div class="card tamanio">
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Evaluacion cualitativa 1" />
+                                        <h:inputFile value="#{documentoBean.cualitativaUno}" id="cualitativaUno"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('cualitativaUno')}"/>
+                                    </h:form>
+                                </div>
                             </div>
                         </div>
 
                     </div>
-                    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>
-                    <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">...</div>
+                    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                        
+                        <div class="card-group">
+                            <div class="card">
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Reporte Bimestral 2" />
+                                        <h:inputFile value="#{documentoBean.reporteBimestralDos}" id="reporteBimestralDos"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('reporteBimestralDos')}"/>
+                                    </h:form>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Evaluacion de las actividades 2" />
+                                        <h:inputFile value="#{documentoBean.evaluacionDos}" id="evaluacionDos"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('evaluacionDos')}"/>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-group">
+                            <div class="card">
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Autoevaluacion 2" />
+                                        <h:inputFile value="#{documentoBean.autoevaluacionDos}" id="autoevaluacionDos"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('autoevaluacionDos')}"/>
+                                    </h:form>
+                                </div>
+                            </div>
+                            <div class="card tamanio">
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Evaluacion cualitativa 2" />
+                                        <h:inputFile value="#{documentoBean.cualitativaDos}" id="cualitativaDos"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('cualitativaDos')}"/>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
+                        
+                        <div class="card-group">
+                            <div class="card">
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Reporte Bimestral 3" />
+                                        <h:inputFile value="#{documentoBean.reporteBimestralTres}" id="reporteBimestralTres"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('reporteBimestralTres')}"/>
+                                    </h:form>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Evaluacion de las actividades 3" />
+                                        <h:inputFile value="#{documentoBean.evaluacionTres}" id="evaluacionTres"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('evaluacionTres')}"/>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-group">
+                            <div class="card">
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Autoevaluacion 3" />
+                                        <h:inputFile value="#{documentoBean.autoevaluacionTres}" id="autoevaluacionTres"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('autoevaluacionTres')}"/>
+                                    </h:form>
+                                </div>
+                            </div>
+                            <div class="card tamanio">
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Evaluacion cualitativa 3" />
+                                        <h:inputFile value="#{documentoBean.cualitativaTres}" id="cualitativaTres"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('cualitativaTres')}"/>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
+                        
+                        <div class="card-group">
+                            <div class="card">
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Reporte Bimestral 1" />
+                                        <h:inputFile value="#{documentoBean.reporteBimestralUno}" id="reporteBimestralUno"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('reporteBimestralUno')}"/>
+                                    </h:form>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Evaluacion de las actividades 1" />
+                                        <h:inputFile value="#{documentoBean.evaluacionUno}" id="evaluacionUno"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('evaluacionUno')}"/>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-group">
+                            <div class="card">
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Autoevaluacion 1" />
+                                        <h:inputFile value="#{documentoBean.autoevaluacionUno}" id="autoevaluacionUno"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('autoevaluacionUno')}"/>
+                                    </h:form>
+                                </div>
+                            </div>
+                            <div class="card tamanio">
+                                <img src="#{request.contextPath}/resources/images/pdfIcon.png" class="card-img-top" alt="pdfIcon.png"/>
+                                <div class="card-body">
+                                    <h:form enctype="multipart/form-data">
+                                        <h:outputLabel value="Subir Evaluacion cualitativa 1" />
+                                        <h:inputFile value="#{documentoBean.cualitativaUno}" id="cualitativaUno"/>
+                                        <h:commandButton value="Subir" action="#{documentoBean.subirDocumento('cualitativaUno')}"/>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
                 </div>
             </ui:define>
 

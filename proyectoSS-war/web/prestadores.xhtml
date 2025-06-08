@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./templates/contenidoGeneral.xhtml">
+
+            <ui:define name="top">
+                 <nav class="navbar bg-body-tertiary">
+                    <div class="container" width="100%">
+                        <a class="navbar-brand" href="#">
+                            <img src="#{request.contextPath}/resources/images/sigss_logo.png" alt="sigss_logo.png" width="200" />
+                        </a>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <h:form>
+                                <h:commandButton value="Inicio"
+                                                 action="#{acceso.redirectHome}"
+                                                 styleClass="btn btn-success"
+                                                 style="background-color: #ffffff; color: black"/>
+                                <h:commandButton value="Prestadores de servicio"
+                                                 action="#{acceso.redirectPrestadores}"
+                                                 styleClass="btn btn-success"
+                                                 style="background-color: #ffffff; color: black"/>
+                                <h:commandButton value="Vacantes"
+                                                 action="#{acceso.redirectVacantesCordi()}"
+                                                 styleClass="btn btn-success"
+                                                 style="background-color: #ffffff; color: black"/>
+                                <h:commandButton value="Cerrar Sesion"
+                                                 action="#{acceso.redirectSignOut}"
+                                                 styleClass="btn btn-success"
+                                                 style="background-color: #ffffff; color: black"/>
+                            </h:form>
+                        </div>
+                    </div>
+
+                </nav>
+            </ui:define>
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="content">
+                <f:view>
+
+
+                    <h:form>
+                        <h1><h:outputText value="List"/></h1>
+                        <h:dataTable value="#{acceso.prestadoresServicio}" var="item">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="FechaNac"/>
+                                </f:facet>
+                                <h:outputText value="#{item.fechaNac}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="IdPrestador"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idPrestador}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="NumeroControl"/>
+                                </f:facet>
+                                <h:outputText value="#{item.numeroControl}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="PromedioFinal"/>
+                                </f:facet>
+                                <h:outputText value="#{item.promedioFinal}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ApellidoMaterno"/>
+                                </f:facet>
+                                <h:outputText value="#{item.apellidoMaterno}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="ApellidoPaterno"/>
+                                </f:facet>
+                                <h:outputText value="#{item.apellidoPaterno}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Carrera"/>
+                                </f:facet>
+                                <h:outputText value="#{item.carrera}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Direccion"/>
+                                </f:facet>
+                                <h:outputText value="#{item.direccion}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Email"/>
+                                </f:facet>
+                                <h:outputText value="#{item.email}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Nombre"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nombre}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Password"/>
+                                </f:facet>
+                                <h:outputText value="#{item.password}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Telefono"/>
+                                </f:facet>
+                                <h:outputText value="#{item.telefono}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="IdCoordinadora"/>
+                                </f:facet>
+                                <h:outputText value="#{item.idCoordinadora}"/>
+                            </h:column>
+                        </h:dataTable>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

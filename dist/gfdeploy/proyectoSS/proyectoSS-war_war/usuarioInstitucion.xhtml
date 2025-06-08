@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./templates/contenidoGeneral.xhtml">
+
+            <ui:define name="top">
+                <nav class="navbar bg-body-tertiary">
+                    <div class="container" width="100%">
+                        <a class="navbar-brand" href="#">
+                            <img src="#{request.contextPath}/resources/images/sigss_logo.png" alt="sigss_logo.png" width="200" />
+                        </a>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <h:form>
+                                <h:commandButton value="Inicio"
+                                                 action="#{acceso.redirectHome}"
+                                                 styleClass="btn btn-success"
+                                                 style="background-color: #ffffff; color: black"/>
+                                
+                                <h:commandButton value="Vacantes"
+                                                 action="#{acceso.redirectVacantes()}"
+                                                 styleClass="btn btn-success"
+                                                 style="background-color: #ffffff; color: black"/>
+                                
+                                <h:commandButton value="Cerrar Sesion"
+                                                 action="#{acceso.redirectSignOut}"
+                                                 styleClass="btn btn-success"
+                                                 style="background-color: #ffffff; color: black"/>
+                            </h:form>
+                        </div>
+                    </div>
+
+                </nav>
+            </ui:define>
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="content">
+                <div class="card mb-3" style="max-width: 540px; margin-top: 40px">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="#{request.contextPath}/resources/images/ITO.png" class="img-fluid rounded-start" alt="ITO.jpg"/>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body" >
+                                <h5 class="card-title">Informacion General</h5>
+                                <p class="card-text">Nombre: #{acceso.institucion.nombreInstitucion}</p>
+                                <p class="card-text">Correo electrónico: #{acceso.institucion.emailInstitucion}</p>
+                                <p class="card-text">Titutlar: #{acceso.institucion.usuarioInstitucion}</p>
+                                <f:view>
+
+
+                                    <h:form>
+                                        <h3><h:outputText value="Prestadores de serivicio"/></h3>
+                                        <h:dataTable value="#{acceso.prestadoresServicio}" var="item">
+
+
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="NumeroControl"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.numeroControl}"/>
+                                            </h:column>
+
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Apellido Materno"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.apellidoMaterno}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Apellido Paterno"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.apellidoPaterno}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Nombre"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.nombre}"/>
+                                            </h:column>
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Carrera"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.carrera}"/>
+                                            </h:column>
+
+
+                                            <h:column>
+                                                <f:facet name="header">
+                                                    <h:outputText value="Telefono"/>
+                                                </f:facet>
+                                                <h:outputText value="#{item.telefono}"/>
+                                            </h:column>
+
+                                        </h:dataTable>
+                                    </h:form>
+                                </f:view>
+
+                                <p class="card-text"><small class="text-body-secondary"></small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -21,15 +21,24 @@ public class MDocumento {
 
     @EJB
     private DocumentoFacade documentoFacade;
-    
-    public List<Documento>documentos(){
-    return documentoFacade.findAll();
+
+    public List<Documento> documentos() {
+        return documentoFacade.findAll();
     }
-    public void registrar(Documento documento){
-    documentoFacade.create(documento);
+
+    public void registrar(Documento documento) {
+        documentoFacade.create(documento);
+    }
+
+    public int obtenerSiguienteId() {
+        List<Documento> lista = documentoFacade.findAll();
+        int maxId = lista.stream()
+                .mapToInt(Documento::getIdDocumento)
+                .max()
+                .orElse(0);
+        return maxId + 1;
     }
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    
 }

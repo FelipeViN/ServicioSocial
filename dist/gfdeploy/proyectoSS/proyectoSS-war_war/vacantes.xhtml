@@ -1,0 +1,194 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./templates/contenidoGeneral.xhtml">
+
+            <ui:define name="top">
+                <nav class="navbar bg-body-tertiary">
+                    <div class="container" width="100%">
+                        <a class="navbar-brand" href="#">
+                            <img src="#{request.contextPath}/resources/images/sigss_logo.png" alt="sigss_logo.png" width="200" />
+                        </a>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <h:form>
+                                <h:commandButton value="Inicio"
+                                                 action="#{acceso.redirectHome}"
+                                                 styleClass="btn btn-success"
+                                                 style="background-color: #ffffff; color: black"/>
+
+                                <h:commandButton value="Vacantes"
+                                                 action="#{acceso.redirectVacantes()}"
+                                                 styleClass="btn btn-success"
+                                                 style="background-color: #ffffff; color: black"/>
+
+                                <h:commandButton value="Cerrar Sesion"
+                                                 action="#{acceso.redirectSignOut}"
+                                                 styleClass="btn btn-success"
+                                                 style="background-color: #ffffff; color: black"/>
+                            </h:form>
+                        </div>
+                    </div>
+
+                </nav>
+            </ui:define>
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="content">
+                <div style="margin-top: 40px">
+
+                    <f:view>
+                        <h:form>
+                            <p:messages closable="true" />
+                            <h1><h:outputText value="Dar de alta vacantes"/></h1>
+                            <h:panelGrid columns="2">
+                                <h:outputLabel value="ClasificacionDependencia:" for="clasificacionDependencia" />
+                                <h:inputText id="clasificacionDependencia" 
+                                             value="#{acceso.vacante.clasificacionDependencia}" 
+                                             title="ClasificacionDependencia"
+                                             styleClass="form-control"
+                                             required="true" 
+                                             requiredMessage="The ClasificacionDependencia field is required."/>
+
+                                <h:outputLabel value="Dependencia:" for="dependencia" />
+                                <h:inputText id="dependencia" 
+                                             value="#{acceso.vacante.dependencia}" 
+                                             title="Dependencia"
+                                             styleClass="form-control"
+                                             required="true" 
+                                             requiredMessage="The Dependencia field is required."/>
+
+                                <h:outputLabel value="DescripcionVacante:" for="descripcionVacante" />
+
+                                <h:inputText id="descripcionVacante"
+                                             value="#{acceso.vacante.descripcionVacante}"
+                                             title="DescripcionVacante"
+                                             styleClass="form-control"
+                                             required="true"
+                                             requiredMessage="The DescripcionVacante field is required."/>
+                                
+
+                                <h:outputLabel value="HorarioVacante:" for="horarioVacante" />
+                                <h:inputText id="horarioVacante"
+                                             value="#{acceso.vacante.horarioVacante}"
+                                             title="HorarioVacante"
+                                             styleClass="form-control"
+                                             required="true"
+                                             requiredMessage="The HorarioVacante field is required."/>
+
+                                <h:outputLabel value="NombreVacante:" for="nombreVacante" />
+                                <h:inputText id="nombreVacante"
+                                             value="#{acceso.vacante.nombreVacante}"
+                                             title="NombreVacante"
+                                             styleClass="form-control"
+                                             required="true"
+                                             requiredMessage="The NombreVacante field is required."/>
+
+                                <h:outputLabel value="TipoDependentica:" for="tipoDependentica" />
+                                <h:inputText id="tipoDependentica" 
+                                             value="#{acceso.vacante.tipoDependentica}" 
+                                             title="TipoDependentica"
+                                             styleClass="form-control"
+                                             required="true" 
+                                             requiredMessage="The TipoDependentica field is required."/>
+
+                                <h:commandButton value="Registro"
+                                                 action="#{acceso.registrarVacante()}"
+                                                 styleClass="btn btn-success"
+                                                 style="background-color: #146a21"/>
+                            </h:panelGrid>
+                        </h:form>
+
+
+                        <h:form>
+                            <h1><h:outputText value="Lista de vacantes publicadas"/></h1>
+                            <h:dataTable value="#{acceso.vacantes}" var="item">
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="IdVacante"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idVacante}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="ClasificacionDependencia"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.clasificacionDependencia}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Dependencia"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.dependencia}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="DescripcionVacante"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.descripcionVacante}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Estado"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.estado}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="HorarioVacante"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.horarioVacante}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="NombreVacante"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.nombreVacante}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="TipoDependentica"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.tipoDependentica}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="Disponible"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.disponible}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="IdInstitucion"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idInstitucion}"/>
+                                </h:column>
+                                <h:column>
+                                    <f:facet name="header">
+                                        <h:outputText value="IdPrestador"/>
+                                    </f:facet>
+                                    <h:outputText value="#{item.idPrestador}"/>
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+
+                    </f:view>
+
+                </div>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

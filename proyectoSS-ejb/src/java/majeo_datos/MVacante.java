@@ -21,12 +21,22 @@ public class MVacante {
 
     @EJB
     private VacanteFacade vacanteFacade;
-    
-    public List<Vacante>vacantes(){
-    return vacanteFacade.findAll();
+
+    public List<Vacante> vacantes() {
+        return vacanteFacade.findAll();
     }
-    public void registrar(Vacante vacante){
-    vacanteFacade.create(vacante);
+
+    public void registrar(Vacante vacante) {
+        vacanteFacade.create(vacante);
+    }
+
+    public int obtenerSiguienteId() {
+        List<Vacante> lista = vacanteFacade.findAll();
+        int maxId = lista.stream()
+                .mapToInt(Vacante::getIdVacante)
+                .max()
+                .orElse(0);
+        return maxId + 1;
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")

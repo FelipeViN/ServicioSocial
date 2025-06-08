@@ -5,15 +5,20 @@
 package control;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import majeo_datos.MCoordinadora;
+import majeo_datos.MDocumento;
 import majeo_datos.MInstitucion;
 import majeo_datos.MPrestadorServicio;
 import majeo_datos.MVacante;
+import modelo.Coordinadora;
 import modelo.Documento;
 import modelo.Institucion;
 import modelo.PrestadorServicio;
@@ -28,6 +33,12 @@ import modelo.Vacante;
 public class Acceso implements Serializable {
 
     @EJB
+    private MCoordinadora mCoordinadora;
+
+    @EJB
+    private MDocumento mDocumento;
+
+    @EJB
     private MInstitucion mInstitucion;
 
     @EJB
@@ -40,6 +51,7 @@ public class Acceso implements Serializable {
     private List<Documento> documentosDelPrestador;
     private List<Vacante> vacantes;
     private List<Institucion> instituciones;
+    private List<Coordinadora> coordinadoras;
     private PrestadorServicio sesion;
     private PrestadorServicio psn;
     private String validatePassword;
@@ -47,11 +59,17 @@ public class Acceso implements Serializable {
     private Institucion institucion;
     private Documento documento;
     private Vacante vacante;
+    private Coordinadora coordinadora;
 
     public Acceso() {
         psn = new PrestadorServicio();
         sesion = new PrestadorServicio();
         loginData = new PrestadorServicio();
+        institucion = new Institucion();
+        coordinadora = new Coordinadora();
+        vacantes = new ArrayList<>();
+        prestadoresServicio = new ArrayList<>();
+        vacante = new Vacante();
     }
     //Metodos genericos
 
@@ -61,6 +79,30 @@ public class Acceso implements Serializable {
 
     public void setPrestadoresServicio(List<PrestadorServicio> prestadoresServicio) {
         this.prestadoresServicio = prestadoresServicio;
+    }
+
+    public Coordinadora getCoordinadora() {
+        return coordinadora;
+    }
+
+    public void setCoordinadora(Coordinadora coordinadora) {
+        this.coordinadora = coordinadora;
+    }
+
+    public List<Institucion> getInstituciones() {
+        return instituciones;
+    }
+
+    public void setInstituciones(List<Institucion> instituciones) {
+        this.instituciones = instituciones;
+    }
+
+    public List<Coordinadora> getCoordinadoras() {
+        return coordinadoras;
+    }
+
+    public void setCoordinadoras(List<Coordinadora> coordinadoras) {
+        this.coordinadoras = coordinadoras;
     }
 
     public List<Documento> getDocumentosDelPrestador() {
@@ -157,20 +199,22 @@ public class Acceso implements Serializable {
 
     public String iniciarSesion() {
         List<PrestadorServicio> lista = mPrestadorServicio.prestadororesServicio();
+        List<Institucion> listaInsituciones = mInstitucion.institutciones();
+        List<Coordinadora> listaCoordinadoras = mCoordinadora.coordinadoras();
 
         for (PrestadorServicio ps : lista) {
             if (ps.getEmail().equals(loginData.getEmail())
                     && ps.getPassword().equals(loginData.getPassword())) {
                 sesion = ps;
                 // Buscar la vacante del prestador
-                List<Vacante> todasVacantes = mVacante.vacantes(); // Método que retorna todas las vacantes
+                List<Vacante> todasVacantes = mVacante.vacantes();
                 for (Vacante v : todasVacantes) {
                     if (v.getIdPrestador().getIdPrestador() == sesion.getIdPrestador()) {
                         vacante = v;
                         List<Institucion> instit = mInstitucion.institutciones();
                         for (Institucion ins : instit) {
                             if (v.getIdInstitucion().getIdInstitucion() == ins.getIdInstitucion()) {
-                                // Obtener la institución asociada a esa vacante
+
                                 institucion = ins;
                                 break;
                             }
@@ -180,10 +224,66 @@ public class Acceso implements Serializable {
                 return redirectUsuario();
             }
         }
+
+
+        for (Institucion ps : listaInsituciones) {
+            if (ps.getEmailInstitucion().equals(loginData.getEmail())
+                    && ps.getPassword().equals(loginData.getPassword())) {
+                institucion = ps;
+                // Buscar la vacante del prestador
+                List<Vacante> todasVacantes = mVacante.vacantes();
+                for (Vacante v : todasVacantes) {
+                    if (v.getIdInstitucion().getIdInstitucion() == institucion.getIdInstitucion()) {
+                        vacantes.add(v);
+                    }
+                }
+
+                for (Vacante v : vacantes) {
+                    PrestadorServicio prestador = v.getIdPrestador();
+                    if (prestador != null && !prestadoresServicio.contains(prestador)) {
+                        prestadoresServicio.add(prestador);
+                    }
+                }
+                return redirectInstitucion();
+            }
+        }
+        for (Coordinadora ps : listaCoordinadoras) {
+            if (ps.getCorreo().equals(loginData.getEmail())
+                    && ps.getPassword().equals(loginData.getPassword())) {
+                coordinadora = ps;
+                prestadoresServicio = mPrestadorServicio.prestadororesServicio();
+                vacantes = mVacante.vacantes();
+                return redirectCoordinadora();
+            }
+        }
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "El email o la contraseña son incorrectas", null));
         return null;
+    }
+
+    public void registrarDocumento(Documento documento, String nombre) {
+        documento.setEstadoValidacion(1);
+
+        documento.setIdPrestador(sesion);
+
+        documento.setNombreDocumento(nombre);
+        documento.setRutaDocumento("C:\\Documentos\\" + nombre);
+
+        documento.setFechaLimiteSubida(new Date());
+
+        documento.setFechaSubidaDocumento(new Date());
+
+        mDocumento.registrar(documento);
+    }
+    public void registrarVacante(){
+    vacante.setIdInstitucion(institucion);
+    vacante.setDisponible(1);
+    vacante.setIdVacante(mVacante.obtenerSiguienteId());
+    vacante.setEstado("disponible");
+    mVacante.registrar(vacante);
+    vacantes.add(vacante);
+    vacante = new Vacante();
     }
 
     // Redirecciones
@@ -213,6 +313,23 @@ public class Acceso implements Serializable {
 
     public String redirectSignOut() {
         return "index?faces-redirect=true";
+    }
+
+    public String redirectCoordinadora() {
+        return "usaurioCoordinadora?faces-redirect=true";
+    }
+
+    public String redirectInstitucion() {
+        return "usuarioInstitucion?faces-redirect=true";
+    }
+    public String redirectVacantes() {
+        return "vacantes?faces-redirect=true";
+    }
+    public String redirectPrestadores() {
+        return "prestadores?faces-redirect=true";
+    }
+    public String redirectVacantesCordi() {
+        return "vacantesCordi?faces-redirect=true";
     }
 
 }
