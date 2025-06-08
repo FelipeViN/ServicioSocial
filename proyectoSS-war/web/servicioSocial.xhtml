@@ -42,42 +42,82 @@
             <ui:define name="content">
                 <ul class="nav nav-tabs" id="myTab" role="tablist" style="margin-top: 40px; background-color: #146a21;">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="false" style="color: #ffffff">Home</button>
+                        <button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="false" style="color: #ffffff">Informacion Servicio Social</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false" style="color: #ffffff">Profile</button>
+                        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false" style="color: #ffffff">Fase 1</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false" style="color: #ffffff">Contact</button>
+                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false" style="color: #ffffff">Fase 2</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" style="color: #ffffff">Disabled</button>
+                        <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" style="color: #ffffff">Fase 3</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" style="color: #ffffff">Fase 4</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" style="color: #ffffff">Fase 5</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" style="color: #ffffff">Fase 6</button>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                         <div class="card mb-3" style="max-width: 540px; margin-top: 40px">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img src="#{request.contextPath}/resources/images/e03444be-2c30-46cc-bbaa-c9df41494f1b.jpg" class="img-fluid rounded-start" alt="fotoDePerfil.jpg"/>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Datos del alumno</h5>
-                                <p class="card-text">Apellido Paterno: #{acceso.sesion.apellidoPaterno}</p>
-                                <p class="card-text">Apellido Materno: #{acceso.sesion.apellidoMaterno}</p>
-                                <p class="card-text">Nombre(s): #{acceso.sesion.nombre}</p>
-                                <p class="card-text">Correo electrónico: #{acceso.sesion.email}</p>
-                                <p class="card-text">No. Control: #{acceso.sesion.numeroControl}</p>
-                                <p class="card-text">Carrera: #{acceso.sesion.carrera}</p>
-                                <p class="card-text">Semestre: Onceavo</p>
-                                <p class="card-text"><small class="text-body-secondary"></small></p>
+                            <div class="row g-0">
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Dependencia</h5>
+                                        <p class="card-text">Tipo Dependencia: #{acceso.vacante.tipoDependentica}</p>
+                                        <p class="card-text">Nombre de la dependencia: #{acceso.institucion.nombreInstitucion}</p>
+                                        <p class="card-text">Clasificacion: #{acceso.vacante.clasificacionDependencia}</p>
+                                        <p class="card-text">Direccion: #{acceso.institucion.direccion}</p>
+                                        <h5 class="card-title">Datos para carta de presentacion</h5>
+                                        <p class="card-text">Titular:#{acceso.institucion.usuarioInstitucion}</p>
+                                        <p class="card-text">Puesto: #{acceso.vacante.nombreVacante}</p>
+                                        <p class="card-text">Programa: #{acceso.vacante.descripcionVacante}</p>
+                                        <h5 class="card-title">Sobre tu servicio</h5>
+                                        <p class="card-text">Modalidad: </p>
+                                        <p class="card-text">Entrada: </p>
+                                        <p class="card-text">Salida: </p>
+                                        <p class="card-text">Jefe Directo: #{acceso.institucion.usuarioInstitucion}</p>
+                                        <p class="card-text"><small class="text-body-secondary"></small></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                        <div class="card-group">
+                            <div class="card">
+                                <img src="..." class="card-img-top" alt="..."/>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                                    </div>
+                            </div>
+                            <div class="card">
+                                <img src="..." class="card-img-top" alt="..."/>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                                    </div>
+                            </div>
+                            <div class="card">
+                                <img src="..." class="card-img-top" alt="..."/>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                                        <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                                    </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
                     <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>
                     <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">...</div>
                 </div>

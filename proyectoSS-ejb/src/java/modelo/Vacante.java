@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Vacante.findByEstado", query = "SELECT v FROM Vacante v WHERE v.estado = :estado"),
     @NamedQuery(name = "Vacante.findByHorarioVacante", query = "SELECT v FROM Vacante v WHERE v.horarioVacante = :horarioVacante"),
     @NamedQuery(name = "Vacante.findByNombreVacante", query = "SELECT v FROM Vacante v WHERE v.nombreVacante = :nombreVacante"),
-    @NamedQuery(name = "Vacante.findByTipoDependentica", query = "SELECT v FROM Vacante v WHERE v.tipoDependentica = :tipoDependentica")})
+    @NamedQuery(name = "Vacante.findByTipoDependentica", query = "SELECT v FROM Vacante v WHERE v.tipoDependentica = :tipoDependentica"),
+    @NamedQuery(name = "Vacante.findByDisponible", query = "SELECT v FROM Vacante v WHERE v.disponible = :disponible")})
 public class Vacante implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -78,9 +79,16 @@ public class Vacante implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "tipo_dependentica")
     private String tipoDependentica;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "disponible")
+    private int disponible;
     @JoinColumn(name = "id_institucion", referencedColumnName = "id_institucion")
     @ManyToOne
     private Institucion idInstitucion;
+    @JoinColumn(name = "idPrestador", referencedColumnName = "id_prestador")
+    @ManyToOne
+    private PrestadorServicio idPrestador;
 
     public Vacante() {
     }
@@ -89,7 +97,7 @@ public class Vacante implements Serializable {
         this.idVacante = idVacante;
     }
 
-    public Vacante(Integer idVacante, String clasificacionDependencia, String dependencia, String descripcionVacante, String horarioVacante, String nombreVacante, String tipoDependentica) {
+    public Vacante(Integer idVacante, String clasificacionDependencia, String dependencia, String descripcionVacante, String horarioVacante, String nombreVacante, String tipoDependentica, int disponible) {
         this.idVacante = idVacante;
         this.clasificacionDependencia = clasificacionDependencia;
         this.dependencia = dependencia;
@@ -97,6 +105,7 @@ public class Vacante implements Serializable {
         this.horarioVacante = horarioVacante;
         this.nombreVacante = nombreVacante;
         this.tipoDependentica = tipoDependentica;
+        this.disponible = disponible;
     }
 
     public Integer getIdVacante() {
@@ -163,12 +172,28 @@ public class Vacante implements Serializable {
         this.tipoDependentica = tipoDependentica;
     }
 
+    public int getDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(int disponible) {
+        this.disponible = disponible;
+    }
+
     public Institucion getIdInstitucion() {
         return idInstitucion;
     }
 
     public void setIdInstitucion(Institucion idInstitucion) {
         this.idInstitucion = idInstitucion;
+    }
+
+    public PrestadorServicio getIdPrestador() {
+        return idPrestador;
+    }
+
+    public void setIdPrestador(PrestadorServicio idPrestador) {
+        this.idPrestador = idPrestador;
     }
 
     @Override

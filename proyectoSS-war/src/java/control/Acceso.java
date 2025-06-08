@@ -11,8 +11,13 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import majeo_datos.MInstitucion;
 import majeo_datos.MPrestadorServicio;
+import majeo_datos.MVacante;
+import modelo.Documento;
+import modelo.Institucion;
 import modelo.PrestadorServicio;
+import modelo.Vacante;
 
 /**
  *
@@ -23,13 +28,25 @@ import modelo.PrestadorServicio;
 public class Acceso implements Serializable {
 
     @EJB
+    private MInstitucion mInstitucion;
+
+    @EJB
+    private MVacante mVacante;
+
+    @EJB
     private MPrestadorServicio mPrestadorServicio;
 
     private List<PrestadorServicio> prestadoresServicio;
+    private List<Documento> documentosDelPrestador;
+    private List<Vacante> vacantes;
+    private List<Institucion> instituciones;
     private PrestadorServicio sesion;
     private PrestadorServicio psn;
     private String validatePassword;
     private PrestadorServicio loginData;
+    private Institucion institucion;
+    private Documento documento;
+    private Vacante vacante;
 
     public Acceso() {
         psn = new PrestadorServicio();
@@ -44,6 +61,46 @@ public class Acceso implements Serializable {
 
     public void setPrestadoresServicio(List<PrestadorServicio> prestadoresServicio) {
         this.prestadoresServicio = prestadoresServicio;
+    }
+
+    public List<Documento> getDocumentosDelPrestador() {
+        return documentosDelPrestador;
+    }
+
+    public void setDocumentosDelPrestador(List<Documento> documentosDelPrestador) {
+        this.documentosDelPrestador = documentosDelPrestador;
+    }
+
+    public Institucion getInstitucion() {
+        return institucion;
+    }
+
+    public void setInstitucion(Institucion institucion) {
+        this.institucion = institucion;
+    }
+
+    public Documento getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(Documento documento) {
+        this.documento = documento;
+    }
+
+    public List<Vacante> getVacantes() {
+        return vacantes;
+    }
+
+    public void setVacantes(List<Vacante> vacantes) {
+        this.vacantes = vacantes;
+    }
+
+    public Vacante getVacante() {
+        return vacante;
+    }
+
+    public void setVacante(Vacante vacante) {
+        this.vacante = vacante;
     }
 
     public PrestadorServicio getSesion() {
@@ -77,7 +134,6 @@ public class Acceso implements Serializable {
     public void setLoginData(PrestadorServicio loginData) {
         this.loginData = loginData;
     }
-    
 
     // Registros
     public String registrarPrestador() {
@@ -101,11 +157,26 @@ public class Acceso implements Serializable {
 
     public String iniciarSesion() {
         List<PrestadorServicio> lista = mPrestadorServicio.prestadororesServicio();
-        
+
         for (PrestadorServicio ps : lista) {
             if (ps.getEmail().equals(loginData.getEmail())
                     && ps.getPassword().equals(loginData.getPassword())) {
                 sesion = ps;
+                // Buscar la vacante del prestador
+                List<Vacante> todasVacantes = mVacante.vacantes(); // Método que retorna todas las vacantes
+                for (Vacante v : todasVacantes) {
+                    if (v.getIdPrestador().getIdPrestador() == sesion.getIdPrestador()) {
+                        vacante = v;
+                        List<Institucion> instit = mInstitucion.institutciones();
+                        for (Institucion ins : instit) {
+                            if (v.getIdInstitucion().getIdInstitucion() == ins.getIdInstitucion()) {
+                                // Obtener la institución asociada a esa vacante
+                                institucion = ins;
+                                break;
+                            }
+                        }
+                    }
+                }
                 return redirectUsuario();
             }
         }
@@ -131,12 +202,15 @@ public class Acceso implements Serializable {
     public String redirectSignUp() {
         return "sign up?faces-redirect=true";
     }
+
     public String redirectInformacion() {
         return "informacion?faces-redirect=true";
     }
+
     public String redirectSerivicioSocial() {
         return "servicioSocial?faces-redirect=true";
     }
+
     public String redirectSignOut() {
         return "index?faces-redirect=true";
     }

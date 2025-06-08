@@ -110,6 +110,8 @@ public class PrestadorServicio implements Serializable {
     @Column(name = "telefono")
     private String telefono;
     @OneToMany(mappedBy = "idPrestador")
+    private Collection<Vacante> vacanteCollection;
+    @OneToMany(mappedBy = "idPrestador")
     private Collection<Calificacion> calificacionCollection;
     @OneToMany(mappedBy = "idPrestador")
     private Collection<AgendaCita> agendaCitaCollection;
@@ -235,6 +237,15 @@ public class PrestadorServicio implements Serializable {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    @XmlTransient
+    public Collection<Vacante> getVacanteCollection() {
+        return vacanteCollection;
+    }
+
+    public void setVacanteCollection(Collection<Vacante> vacanteCollection) {
+        this.vacanteCollection = vacanteCollection;
     }
 
     @XmlTransient
