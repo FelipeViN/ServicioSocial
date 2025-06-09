@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Matsu/Documents/NetBeansProjects/proyectoSS/proyectoSS-war/web/login.xhtml</file>
-            <file>file:/C:/Users/Matsu/Documents/NetBeansProjects/proyectoSS/proyectoSS-war/web/prestadores.xhtml</file>
+            <file>file:/C:/Users/Matsu/Documents/NetBeansProjects/proyectoSS/proyectoSS-war/src/java/control/DocumentoBean.java</file>
             <file>file:/C:/Users/Matsu/Documents/NetBeansProjects/proyectoSS/proyectoSS-war/web/vacantesCordi.xhtml</file>
-            <file>file:/C:/Users/Matsu/Documents/NetBeansProjects/proyectoSS/proyectoSS-war/src/java/control/Acceso.java</file>
             <file>file:/C:/Users/Matsu/Documents/NetBeansProjects/proyectoSS/proyectoSS-war/web/vacantes.xhtml</file>
-            <file>file:/C:/Users/Matsu/Documents/NetBeansProjects/proyectoSS/proyectoSS-war/web/usuarioInstitucion.xhtml</file>
-            <file>file:/C:/Users/Matsu/Documents/NetBeansProjects/proyectoSS/proyectoSS-war/web/usaurioCoordinadora.xhtml</file>
-            <file>file:/C:/Users/Matsu/Documents/NetBeansProjects/proyectoSS/proyectoSS-war/web/sign%20up.xhtml</file>
+            <file>file:/C:/Users/Matsu/Documents/NetBeansProjects/proyectoSS/proyectoSS-war/src/java/control/Acceso.java</file>
+            <file>file:/C:/Users/Matsu/Documents/NetBeansProjects/proyectoSS/proyectoSS-war/src/java/control/PDFBoxReader.java</file>
         </group>
     </open-files>
 </project-private>

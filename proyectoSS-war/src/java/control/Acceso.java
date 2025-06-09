@@ -48,8 +48,10 @@ public class Acceso implements Serializable {
     private MPrestadorServicio mPrestadorServicio;
 
     private List<PrestadorServicio> prestadoresServicio;
+    private List<PrestadorServicio> prestadoresServicioPropios;
     private List<Documento> documentosDelPrestador;
     private List<Vacante> vacantes;
+    private List<Vacante> vacantesPropias;
     private List<Institucion> instituciones;
     private List<Coordinadora> coordinadoras;
     private PrestadorServicio sesion;
@@ -68,8 +70,11 @@ public class Acceso implements Serializable {
         institucion = new Institucion();
         coordinadora = new Coordinadora();
         vacantes = new ArrayList<>();
+        vacantesPropias = new ArrayList<>();
         prestadoresServicio = new ArrayList<>();
+        prestadoresServicioPropios = new ArrayList<>();
         vacante = new Vacante();
+        instituciones = new ArrayList<>();
     }
     //Metodos genericos
 
@@ -177,6 +182,23 @@ public class Acceso implements Serializable {
         this.loginData = loginData;
     }
 
+    public List<PrestadorServicio> getPrestadoresServicioPropios() {
+        return prestadoresServicioPropios;
+    }
+
+    public void setPrestadoresServicioPropios(List<PrestadorServicio> prestadoresServicioPropios) {
+        this.prestadoresServicioPropios = prestadoresServicioPropios;
+    }
+
+    public List<Vacante> getVacantesPropias() {
+        return vacantesPropias;
+    }
+
+    public void setVacantesPropias(List<Vacante> vacantesPropias) {
+        this.vacantesPropias = vacantesPropias;
+    }
+    
+
     // Registros
     public String registrarPrestador() {
         if (!psn.getPassword().equals(validatePassword)) {
@@ -201,47 +223,71 @@ public class Acceso implements Serializable {
         List<PrestadorServicio> lista = mPrestadorServicio.prestadororesServicio();
         List<Institucion> listaInsituciones = mInstitucion.institutciones();
         List<Coordinadora> listaCoordinadoras = mCoordinadora.coordinadoras();
+        List<Vacante> todasVacantes = mVacante.vacantes();
+        List<Institucion> instit = mInstitucion.institutciones();
+        try {
 
         for (PrestadorServicio ps : lista) {
             if (ps.getEmail().equals(loginData.getEmail())
                     && ps.getPassword().equals(loginData.getPassword())) {
                 sesion = ps;
-                // Buscar la vacante del prestador
-                List<Vacante> todasVacantes = mVacante.vacantes();
-                for (Vacante v : todasVacantes) {
-                    if (v.getIdPrestador().getIdPrestador() == sesion.getIdPrestador()) {
-                        vacante = v;
-                        List<Institucion> instit = mInstitucion.institutciones();
-                        for (Institucion ins : instit) {
-                            if (v.getIdInstitucion().getIdInstitucion() == ins.getIdInstitucion()) {
 
+                todasVacantes = mVacante.vacantes();
+                for (Vacante v : todasVacantes) {
+                    FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    "Entro a buscar vacantes, ps", null));
+                    if (v.getIdPrestador().getIdPrestador() == sesion.getIdPrestador()) {
+                        FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    "Asigno la vacante, ps", null));
+                        vacante = v;
+                        instit = mInstitucion.institutciones();
+                        for (Institucion ins : listaInsituciones) {
+                            FacesContext.getCurrentInstance().addMessage(null,
+                                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                            "Entro a buscar institucion", null));
+                            if (v.getIdInstitucion().getIdInstitucion() == ins.getIdInstitucion()) {
+                                FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    "asigno la institucion", null));
                                 institucion = ins;
-                                break;
+                                return redirectUsuario();
+                               
                             }
                         }
                     }
                 }
-                return redirectUsuario();
+                
             }
         }
-
 
         for (Institucion ps : listaInsituciones) {
             if (ps.getEmailInstitucion().equals(loginData.getEmail())
                     && ps.getPassword().equals(loginData.getPassword())) {
                 institucion = ps;
                 // Buscar la vacante del prestador
-                List<Vacante> todasVacantes = mVacante.vacantes();
-                for (Vacante v : todasVacantes) {
+                vacantes = mVacante.vacantes();
+                for (Vacante v : vacantes) {
+                    FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    "Entro a vacantes, insti", null));
                     if (v.getIdInstitucion().getIdInstitucion() == institucion.getIdInstitucion()) {
-                        vacantes.add(v);
+                        FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    "Agrego vacantes, insti", null));
+                        vacantesPropias.add(v);
                     }
                 }
+               
 
-                for (Vacante v : vacantes) {
+                for (Vacante v : vacantesPropias) {
                     PrestadorServicio prestador = v.getIdPrestador();
-                    if (prestador != null && !prestadoresServicio.contains(prestador)) {
-                        prestadoresServicio.add(prestador);
+                    if (prestador != null && !prestadoresServicio.contains(prestador) ) {
+                        FacesContext.getCurrentInstance().addMessage(null,
+                            new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                                    "agrego prestadores, insti", null));
+                        prestadoresServicioPropios.add(prestador);
                     }
                 }
                 return redirectInstitucion();
@@ -259,6 +305,12 @@ public class Acceso implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "El email o la contraseña son incorrectas", null));
+    } catch (Exception e) {
+        e.printStackTrace(); 
+        FacesContext.getCurrentInstance().addMessage(null,
+            new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: " + e.getMessage()+ " Vacantes"+todasVacantes+" Institutos"+instit+ "vacante "+sesion.getIdPrestador(), null));
+        return null;
+    }
         return null;
     }
 
@@ -276,14 +328,15 @@ public class Acceso implements Serializable {
 
         mDocumento.registrar(documento);
     }
-    public void registrarVacante(){
-    vacante.setIdInstitucion(institucion);
-    vacante.setDisponible(1);
-    vacante.setIdVacante(mVacante.obtenerSiguienteId());
-    vacante.setEstado("disponible");
-    mVacante.registrar(vacante);
-    vacantes.add(vacante);
-    vacante = new Vacante();
+
+    public void registrarVacante() {
+        vacante.setIdInstitucion(institucion);
+        vacante.setDisponible(1);
+        vacante.setIdVacante(mVacante.obtenerSiguienteId());
+        vacante.setEstado("disponible");
+        mVacante.registrar(vacante);
+        vacantes.add(vacante);
+        vacante = new Vacante();
     }
 
     // Redirecciones
@@ -322,12 +375,15 @@ public class Acceso implements Serializable {
     public String redirectInstitucion() {
         return "usuarioInstitucion?faces-redirect=true";
     }
+
     public String redirectVacantes() {
         return "vacantes?faces-redirect=true";
     }
+
     public String redirectPrestadores() {
         return "prestadores?faces-redirect=true";
     }
+
     public String redirectVacantesCordi() {
         return "vacantesCordi?faces-redirect=true";
     }
